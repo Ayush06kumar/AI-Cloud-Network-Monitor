@@ -35,7 +35,7 @@ function App() {
 
     try {
 
-      const response = await axios.get("http://127.0.0.1:5000/system");
+      const response = await axios.get("https://ai-cloud-monitor-api.onrender.com/system");
 
       setSystemData(response.data);
       setChartData(prevData => [
@@ -68,7 +68,7 @@ function App() {
 
     try {
 
-      const response = await axios.get("http://127.0.0.1:5000/processes");
+      const response = await axios.get("https://ai-cloud-monitor-api.onrender.com/processes");
 
       setProcesses(response.data);
 
@@ -83,7 +83,7 @@ function App() {
 
   try {
 
-    const response = await axios.get("http://127.0.0.1:5000/alerts");
+    const response = await axios.get("https://ai-cloud-monitor-api.onrender.com/alerts");
 
     setAlerts(response.data);
 
@@ -99,7 +99,7 @@ const fetchPackets = async () => {
 
   try {
 
-    const response = await axios.get("http://127.0.0.1:5000/packets");
+    const response = await axios.get("https://ai-cloud-monitor-api.onrender.com/packets");
 
     setPackets(response.data);
 
@@ -129,7 +129,7 @@ const fetchAIAnalysis = async () => {
   try {
 
     const response = await axios.get(
-      "http://127.0.0.1:5000/ai-threat-analysis"
+      "https://ai-cloud-monitor-api.onrender.com/ai-threat-analysis"
     );
 
     setAiAnalysis(response.data);
