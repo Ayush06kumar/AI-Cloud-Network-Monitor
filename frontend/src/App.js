@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import AuthPage from "./AuthPage";
+
 import {
   LineChart,
   Line,
@@ -11,6 +13,7 @@ import {
 } from "recharts";
 
 function App() {
+
 
   const [systemData, setSystemData] = useState({
     cpu: 0,
@@ -24,8 +27,6 @@ function App() {
   const [chartData, setChartData] = useState([]);
   const [aiAnalysis, setAiAnalysis] = useState({});
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
   const [lastUpdated, setLastUpdated] = useState("");
 
 
@@ -110,19 +111,6 @@ const fetchPackets = async () => {
   }
 
 };
-const handleLogin = () => {
-
-  if (username === "admin" && password === "admin123") {
-
-    setIsLoggedIn(true);
-
-  } else {
-
-    alert("Invalid Credentials");
-
-  }
-
-};
 
 const fetchAIAnalysis = async () => {
 
@@ -168,85 +156,11 @@ const fetchAIAnalysis = async () => {
 
   }, []);
 
+
 if (!isLoggedIn) {
 
   return (
-
-    <div style={{
-      backgroundColor: "#020617",
-      minHeight: "100vh",
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      color: "white",
-      fontFamily: "Arial"
-    }}>
-
-      <div style={{
-        backgroundColor: "#1e293b",
-        padding: "40px",
-        borderRadius: "15px",
-        width: "350px",
-        boxShadow: "0px 0px 20px rgba(56,189,248,0.3)"
-      }}>
-
-        <h1 style={{
-          textAlign: "center",
-          marginBottom: "30px"
-        }}>
-          🔐 NetSecure Login
-        </h1>
-
-        <input
-          type="text"
-          placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          style={{
-            width: "100%",
-            padding: "12px",
-            marginBottom: "20px",
-            borderRadius: "10px",
-            border: "none"
-          }}
-        />
-
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          style={{
-            width: "100%",
-            padding: "12px",
-            marginBottom: "20px",
-            borderRadius: "10px",
-            border: "none"
-          }}
-        />
-
-        <button
-          onClick={handleLogin}
-          style={{
-            width: "100%",
-            padding: "12px",
-            backgroundColor: "#38bdf8",
-            border: "none",
-            borderRadius: "10px",
-            color: "white",
-            fontWeight: "bold",
-            cursor: "pointer"
-          }}
-        >
-
-          LOGIN
-
-        </button>
-
-      </div>
-
-    </div>
-
+    <AuthPage setIsLoggedIn={setIsLoggedIn} />
   );
 
 }
