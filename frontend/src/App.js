@@ -1,8 +1,5 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import AuthPage from "./AuthPage";
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "./firebase";
 
 import {
   LineChart,
@@ -28,7 +25,6 @@ function App() {
   const [packets, setPackets] = useState([]);
   const [chartData, setChartData] = useState([]);
   const [aiAnalysis, setAiAnalysis] = useState({});
-  const [isLoggedIn, setIsLoggedIn] = useState(null);
   const [lastUpdated, setLastUpdated] = useState("");
 
 
@@ -132,25 +128,6 @@ function App() {
 
   };
 
-  useEffect(() => {
-
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-
-      if (user) {
-
-        setIsLoggedIn(true);
-
-      } else {
-
-        setIsLoggedIn(false);
-
-      }
-
-    });
-
-    return () => unsubscribe();
-
-  }, []);
 
   // Auto refresh every 3 seconds
   useEffect(() => {
@@ -178,30 +155,6 @@ function App() {
 
   }, []);
 
-  if (isLoggedIn === null) {
-
-    return (
-      <div style={{
-        backgroundColor: "#020617",
-        color: "white",
-        height: "100vh",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center"
-      }}>
-        Loading...
-      </div>
-    );
-
-  }
-
-  if (!isLoggedIn) {
-
-    return (
-      <AuthPage setIsLoggedIn={setIsLoggedIn} />
-    );
-
-  }
 
 
   return (
@@ -276,20 +229,6 @@ function App() {
             </p>
 
           </div>
-
-          <button
-            onClick={() => setIsLoggedIn(false)}
-            style={{
-              padding: "10px 20px",
-              backgroundColor: "#ef4444",
-              border: "none",
-              borderRadius: "10px",
-              color: "white",
-              cursor: "pointer"
-            }}
-          >
-            Logout
-          </button>
 
         </div>
 
